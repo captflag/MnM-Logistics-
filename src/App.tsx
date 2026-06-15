@@ -11,6 +11,7 @@ import { ScrollProgress } from './components/layout/ScrollProgress';
 const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })));
 const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
 const ServicesPage = lazy(() => import('./pages/Services').then((m) => ({ default: m.ServicesPage })));
+const Fleet = lazy(() => import('./pages/Fleet').then((m) => ({ default: m.Fleet })));
 const Network = lazy(() => import('./pages/Network').then((m) => ({ default: m.Network })));
 const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })));
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<ServicesPage />} />
+            <Route path="/fleet" element={<Fleet />} />
             <Route path="/network" element={<Network />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

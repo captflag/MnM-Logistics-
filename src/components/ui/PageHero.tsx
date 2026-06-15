@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 
-export function PageHero({ title, subtitle, crumb }: { title: React.ReactNode; subtitle?: string; crumb: string; }) {
+export function PageHero({ title, subtitle, crumb, eyebrow }: {
+  title: React.ReactNode; subtitle?: string; crumb: string; eyebrow?: string;
+}) {
   return (
     <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 overflow-hidden border-b border-ink-800">
       <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute -top-32 right-0 w-96 h-96 rounded-full bg-brand-600/15 blur-3xl" />
+      <div className="absolute -top-32 right-0 w-96 h-96 rounded-full bg-brand-600/15 blur-3xl animate-drift2" />
       <div className="container-x relative z-10">
         <Reveal>
           <nav className="flex items-center gap-1.5 text-sm text-mist-400 mb-5">
@@ -15,8 +17,13 @@ export function PageHero({ title, subtitle, crumb }: { title: React.ReactNode; s
             <span className="text-mist-200">{crumb}</span>
           </nav>
         </Reveal>
+        {eyebrow && (
+          <Reveal>
+            <span className="eyebrow mb-3"><span className="h-px w-7 bg-accent-500 inline-block" /> {eyebrow}</span>
+          </Reveal>
+        )}
         <Reveal delay={0.05}>
-          <h1 className="font-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] max-w-4xl">
+          <h1 className="font-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] max-w-4xl mt-2">
             {title}
           </h1>
         </Reveal>
