@@ -30,8 +30,11 @@ export function Nav() {
     <header className="fixed top-0 inset-x-0 z-50">
       <div className={`transition-all duration-300 ${scrolled ? 'bg-ink-950/85 backdrop-blur-lg border-b border-ink-700/60' : 'bg-transparent'}`}>
         <nav className="container-x flex items-center justify-between h-18 py-3.5">
-          <Link to="/" className="shrink-0" onClick={() => setOpen(false)} aria-label="MNM Logistics home">
-            <Logo className="h-9 w-auto" />
+          <Link to="/" className="shrink-0 flex items-center gap-2.5" onClick={() => setOpen(false)} aria-label="MNM Logistics home">
+            <Logo variant="mark" className="h-9 w-auto" />
+            <span className="font-display font-extrabold text-lg md:text-xl tracking-tight text-white leading-none">
+              MNM <span className="text-brand-400">Logistics</span>
+            </span>
           </Link>
 
           <ul className="hidden lg:flex items-center gap-1">

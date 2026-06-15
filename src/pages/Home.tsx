@@ -6,6 +6,7 @@ import { AboutSnippet } from '../components/home/AboutSnippet';
 import { ServicesPreview } from '../components/home/ServicesPreview';
 import { WhyUs } from '../components/home/WhyUs';
 import { Industries } from '../components/home/Industries';
+import { FleetShowcase } from '../components/home/FleetShowcase';
 import { MidCTA } from '../components/home/MidCTA';
 import { Process } from '../components/home/Process';
 import { Testimonials } from '../components/home/Testimonials';
@@ -22,6 +23,7 @@ export function Home() {
       <ServicesPreview />
       <WhyUs />
       <Industries />
+      <FleetShowcase />
       <MidCTA />
       <Process />
       <Testimonials />
