@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Quote } from 'lucide-react';
 import { testimonials } from '../../data/company';
 import { SectionHeading } from '../ui/SectionHeading';
+import { Img } from '../ui/Img';
+import { truckImg } from '../../data/company';
 
 export function Testimonials() {
   const [idx, setIdx] = useState(0);
@@ -18,12 +20,11 @@ export function Testimonials() {
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden border-y border-ink-800">
-      <img
-        aria-hidden
-        src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=2000"
+      <Img
+        src={truckImg.night}
+        fallback="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=2000"
         alt=""
         className="absolute inset-0 w-full h-full object-cover"
-        loading="lazy"
       />
       <div className="absolute inset-0 bg-ink-950/88" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/70 to-ink-950" />

@@ -33,7 +33,7 @@ export const company = {
   // e.g. heroVideo: '/hero.mp4'). Keep it short, muted-friendly, and well-lit.
   heroVideo: 'https://videos.pexels.com/video-files/11644561/11644561-hd_1920_1080_30fps.mp4', // FPP drive through the Rockies (Pexels, free license)
   heroVideoAlt: '/hero.mp4', // local fallback if the external clip is blocked
-  heroPoster: 'https://images.pexels.com/videos/11644561/alberta-banff-banff-national-park-blue-sky-11644561.jpeg?auto=compress&cs=tinysrgb&w=2000',
+  heroPoster: '/trucks/night-highway.jpg',
 
   // Short pitch used in footer / meta
   pitch:
@@ -62,6 +62,15 @@ export const company = {
     instagram: '#', // TODO
     facebook: '#', // TODO
   },
+};
+
+// ---- Image fallback (used until your real photos are added to /public/trucks) ----
+export const FALLBACK_TRUCK = 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200';
+export const truckImg = {
+  night: '/trucks/night-highway.jpg',
+  fleet: '/trucks/flatbed-fleet.jpg',
+  machinery: '/trucks/flatbed-machinery.jpg',
+  container: '/trucks/container-highway.jpg',
 };
 
 // ---- Lead delivery (makes the quote/enquiry forms actually send) ---------
@@ -111,7 +120,7 @@ export const services: Service[] = [
       'Dedicated account relationship manager',
     ],
     icon: 'Truck',
-    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200',
+    image: '/trucks/container-highway.jpg',
   },
   {
     id: 'contract',
@@ -126,7 +135,7 @@ export const services: Service[] = [
       'Integrated with factory & warehouse dispatch',
     ],
     icon: 'Factory',
-    image: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&q=80&w=1200',
+    image: '/trucks/flatbed-fleet.jpg',
   },
   {
     id: 'odc',
@@ -141,7 +150,7 @@ export const services: Service[] = [
       'Transit insurance & cargo liability support',
     ],
     icon: 'HardHat',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=1200',
+    image: '/trucks/flatbed-machinery.jpg',
   },
   {
     id: 'secure',
@@ -156,7 +165,7 @@ export const services: Service[] = [
       'Point-to-point transit, zero unverified layovers',
     ],
     icon: 'ShieldCheck',
-    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&q=80&w=1200',
+    image: '/trucks/night-highway.jpg',
   },
 ];
 

@@ -4,7 +4,8 @@ import { PageHero } from '../components/ui/PageHero';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { Reveal } from '../components/ui/Reveal';
 import { CountUp } from '../components/ui/CountUp';
-import { stats, coreValues } from '../data/company';
+import { stats, coreValues, truckImg, FALLBACK_TRUCK } from '../data/company';
+import { Img } from '../components/ui/Img';
 
 const valueIcons = [Truck, Handshake, Cpu];
 
@@ -21,11 +22,11 @@ export function About() {
         <div className="container-x grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <Reveal>
             <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200"
-                alt="MNM Logistics fleet"
+              <Img
+                src={truckImg.fleet}
+                fallback={FALLBACK_TRUCK}
+                alt="MNM Logistics flatbed fleet"
                 className="rounded-2xl border border-ink-700 w-full object-cover aspect-[4/3]"
-                loading="lazy"
               />
               <div className="absolute -bottom-6 -right-4 sm:right-6 card p-5 bg-ink-900">
                 <div className="font-display font-extrabold text-3xl text-white">100%</div>

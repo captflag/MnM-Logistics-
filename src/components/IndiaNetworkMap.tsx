@@ -1,6 +1,6 @@
 /* Accurate India network map (geometry from @svg-maps/india, MIT).
-   Real state borders + pulsing hubs, flowing lanes, and a moving truck.
-   SVG SMIL animations only — no JS runtime cost. */
+   Real state borders + pulsing hubs + bidirectional (to-and-fro) freight flow
+   on every lane. SVG SMIL animations only — no JS runtime cost. */
 import { INDIA_VIEWBOX, INDIA_PATHS } from '../data/indiaGeo';
 
 type Hub = { n: string; x: number; y: number; a: 'start' | 'end'; dx: number; dy: number };
@@ -15,14 +15,26 @@ const hubs: Hub[] = [
   { n: 'Kolkata', x: 388, y: 352, a: 'start', dx: 10, dy: 0 },
 ];
 
-const lanes: [number, number][] = [
-  [0, 3], [3, 5], [6, 7], [4, 0], [2, 6],
+const lanePairs: [number, number][] = [
+  [0, 3], [3, 5], [6, 7], [4, 0], [2, 6], [0, 7], [4, 6],
 ];
+
+const lanes = lanePairs.map(([a, b]) => {
+  const A = hubs[a], B = hubs[b];
+  const len = Math.hypot(B.x - A.x, B.y - A.y);
+  const dur = Math.max(3.2, Math.min(7, len / 48));
+  return {
+    fwd: `M${A.x},${A.y} L${B.x},${B.y}`,
+    rev: `M${B.x},${B.y} L${A.x},${A.y}`,
+    x1: A.x, y1: A.y, x2: B.x, y2: B.y,
+    dur: +dur.toFixed(2),
+  };
+});
 
 export function IndiaNetworkMap() {
   return (
-    <svg viewBox={INDIA_VIEWBOX} className="w-full h-auto" role="img" aria-label="Animated map of MNM Logistics' pan-India network">
-      <title>MNM Logistics pan-India network</title>
+    <svg viewBox={INDIA_VIEWBOX} className="w-full h-auto" role="img" aria-label="Animated map of MNM Logistics' pan-India network with two-way freight movement">
+      <title>MNM Logistics pan-India network — two-way freight flow</title>
 
       {/* Country / states */}
       <g>
@@ -31,26 +43,30 @@ export function IndiaNetworkMap() {
         ))}
       </g>
 
-      {/* Lanes (flowing dashes) */}
-      {lanes.map(([a, b], i) => (
-        <line
-          key={i}
-          x1={hubs[a].x} y1={hubs[a].y} x2={hubs[b].x} y2={hubs[b].y}
-          stroke="rgba(224,168,46,0.6)" strokeWidth="1.6" strokeDasharray="6 8" strokeLinecap="round"
-        >
-          <animate attributeName="stroke-dashoffset" values="0;-28" dur="1.3s" repeatCount="indefinite" />
-        </line>
+      {/* Static lane lines */}
+      {lanes.map((l, i) => (
+        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="rgba(170,190,200,0.18)" strokeWidth="1" />
       ))}
 
-      {/* Moving truck along the main corridor */}
-      <g>
-        <circle r="4.5" fill="#e0a82e" />
-        <circle r="4.5" fill="#e0a82e" opacity="0.5">
-          <animate attributeName="r" values="4.5;10" dur="1.4s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.5;0" dur="1.4s" repeatCount="indefinite" />
-        </circle>
-        <animateMotion dur="7s" repeatCount="indefinite" path="M205,200 L132,410 L210,527" />
-      </g>
+      {/* Bidirectional freight packets on every lane */}
+      {lanes.map((l, i) => (
+        <g key={`m${i}`}>
+          {/* outbound (gold) */}
+          <circle r="3.6" fill="#e0a82e">
+            <animateMotion dur={`${l.dur}s`} repeatCount="indefinite" path={l.fwd} begin={`${(i * 0.5).toFixed(2)}s`} />
+          </circle>
+          <circle r="2" fill="#fff2d6">
+            <animateMotion dur={`${l.dur}s`} repeatCount="indefinite" path={l.fwd} begin={`${(i * 0.5).toFixed(2)}s`} />
+          </circle>
+          {/* inbound (teal) */}
+          <circle r="3.2" fill="#2dd4bf">
+            <animateMotion dur={`${(l.dur * 1.1).toFixed(2)}s`} repeatCount="indefinite" path={l.rev} begin={`${(i * 0.5 + l.dur / 2).toFixed(2)}s`} />
+          </circle>
+          <circle r="1.8" fill="#d6fff6">
+            <animateMotion dur={`${(l.dur * 1.1).toFixed(2)}s`} repeatCount="indefinite" path={l.rev} begin={`${(i * 0.5 + l.dur / 2).toFixed(2)}s`} />
+          </circle>
+        </g>
+      ))}
 
       {/* Hub dots + labels */}
       {hubs.map((h) => (
@@ -59,7 +75,7 @@ export function IndiaNetworkMap() {
             <animate attributeName="r" values="4;18" dur="2.6s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.7;0" dur="2.6s" repeatCount="indefinite" />
           </circle>
-          <circle cx={h.x} cy={h.y} r="4" fill="#2dd4bf" />
+          <circle cx={h.x} cy={h.y} r="4.5" fill="#2dd4bf" />
           <text x={h.x + h.dx} y={h.y + h.dy} textAnchor={h.a} fontFamily="Inter, sans-serif" fontSize="13" fontWeight="700" fill="#eaf2f1">
             {h.n}
           </text>

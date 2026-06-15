@@ -3,7 +3,8 @@ import { ArrowRight, Check } from 'lucide-react';
 import { PageHero } from '../components/ui/PageHero';
 import { Reveal } from '../components/ui/Reveal';
 import { Icon } from '../lib/icons';
-import { services } from '../data/company';
+import { services, FALLBACK_TRUCK } from '../data/company';
+import { Img } from '../components/ui/Img';
 
 export function ServicesPage() {
   return (
@@ -20,7 +21,7 @@ export function ServicesPage() {
             <Reveal key={s.id} delay={(i % 2) * 0.08}>
               <article className={`group card overflow-hidden grid lg:grid-cols-2 ${i % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
                 <div className="relative min-h-64 lg:[direction:ltr]">
-                  <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
+                  <Img src={s.image} fallback={FALLBACK_TRUCK} alt={s.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent lg:bg-gradient-to-r" />
                 </div>
                 <div className="p-8 lg:p-10 lg:[direction:ltr]">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
-import { company, coreValues } from '../../data/company';
+import { company, coreValues, truckImg, FALLBACK_TRUCK } from '../../data/company';
+import { Img } from '../ui/Img';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Reveal } from '../ui/Reveal';
 
@@ -10,11 +11,11 @@ export function AboutSnippet() {
       <div className="container-x grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal>
           <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200"
-              alt="MNM Logistics fleet on the move"
+            <Img
+              src={truckImg.container}
+              fallback={FALLBACK_TRUCK}
+              alt="MNM Logistics container truck on the highway"
               className="rounded-2xl border border-ink-700 w-full object-cover aspect-[4/3]"
-              loading="lazy"
             />
             <div className="absolute -bottom-6 -right-4 sm:right-6 card bg-ink-900 px-5 py-4">
               <div className="font-display font-extrabold text-2xl text-white">Since {company.foundedYear}</div>
