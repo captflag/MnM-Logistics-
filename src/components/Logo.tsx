@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 /* Official MNM Logistics logo.
    variant="full" -> /logo.png (truck + wordmark lockup)
-   variant="mark" -> /logo-mark.png (truck only, for compact use)
+   variant="mark" -> /Logo-png-new.png (new standalone truck mark)
    Falls back to a built-in SVG if the file isn't present. */
 export function Logo({ className = 'h-10 w-auto', variant = 'full' }: { className?: string; variant?: 'full' | 'mark' }) {
   const [failed, setFailed] = useState(false);
-  const src = variant === 'mark' ? '/logo-mark.png' : '/logo.png';
+  const src = variant === 'mark' ? '/Logo-png-new.png' : '/logo.png';
 
   if (!failed) {
     return <img src={src} alt="MNM Logistics" className={className} onError={() => setFailed(true)} />;

@@ -9,7 +9,12 @@ export function Footer() {
     <footer className="border-t border-ink-700/60 bg-ink-950 mt-24">
       <div className="container-x py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-1">
-          <Logo className="h-14 w-auto mb-5" />
+          <div className="flex items-center gap-3 mb-5">
+            <Logo variant="mark" className="h-11 w-auto" />
+            <span className="font-display font-extrabold text-xl tracking-tight text-white leading-none">
+              MNM <span className="text-brand-400">Logistics</span>
+            </span>
+          </div>
           <p className="text-mist-400 text-sm leading-relaxed max-w-xs">
             {company.pitch}
           </p>
